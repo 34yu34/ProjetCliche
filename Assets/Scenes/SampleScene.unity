@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 110294779}
   - component: {fileID: 110294778}
   m_Layer: 7
-  m_Name: Interavtable
+  m_Name: Interactable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -348,7 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementSpeed: 3
-  _viewDist: 5
+  _viewDist: 1
   _currentInteractable: {fileID: 0}
 --- !u!50 &530904846
 Rigidbody2D:
