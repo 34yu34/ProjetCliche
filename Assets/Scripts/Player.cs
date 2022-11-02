@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(new Vector2(position.x, position.y), _direction, _viewDist, 1 << Interactable.InteractableLayer);
         
         #if UNITY_EDITOR
-            Debug.DrawLine(position, position + (Vector3)_direction * _viewDist, Color.red);
+            CustomDebug.DrawLine(position, position + (Vector3)_direction * _viewDist, Color.red);
         #endif
 
         if (!hit)
@@ -63,5 +63,9 @@ public class Player : MonoBehaviour
         }
 
         _currentInteractable = interactable;
+#if UNITY_EDITOR
+        CustomDebug.DrawSphere(_currentInteractable.transform.position, 1.0f, Color.yellow);
+#endif
+        
     }
 }
