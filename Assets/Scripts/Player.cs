@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
         }
 
         _currentInteractable = interactable;
-        CustomDebug.DrawBox(_currentInteractable.transform.position, _currentInteractable.GetComponent<BoxCollider2D>().size, Color.green);
+        CustomDebug.DrawBox(_currentInteractable.transform.position, _currentInteractable.BoxCollider.size, Color.green);
 
     }
 }
