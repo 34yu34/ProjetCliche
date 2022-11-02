@@ -1,5 +1,6 @@
 using System;
-using DefaultNamespace;
+using Helpers;
+using Interactables;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -36,7 +37,7 @@ public class Player : MonoBehaviour
 
         SetupDirection();
         
-        CheckForward();
+        CheckForwardInteractables();
     }
 
 
@@ -51,40 +52,21 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void CheckForward()
+    private void CheckForwardInteractables()
     {
-        _currentInteractable = null;
-        
-        var position = transform.position;
-        RaycastHit2D hit = Physics2D.Raycast(new Vector2(position.x, position.y), _direction, _viewDist, 1 << Interactable.InteractableLayer);
-        
-        CustomDebug.DrawLine(position,_direction, _viewDist, Color.red);
-
-        if (!hit)
-        {
-            return;
-        }
-
-        var interactable = hit.collider.GetComponent<Interactable>();
-
-        if (!interactable)
-        {
-            return;
-        }
-
-        _currentInteractable = interactable;
-        CustomDebug.DrawBox(_currentInteractable.transform.position, _currentInteractable.BoxCollider.size, Color.green);
+        _currentInteractable = PhysicsFinder.RaycastFind<Interactable>(
+            transform.position,
+            _direction,
+            _viewDist,
+            1 << Interactable.InteractableLayer
+        );
     }
-    
-    
+
     private void ActivateInteractable()
     {
-        if (_currentInteractable is null)
-        {
-            return;
-        }
+        if (_currentInteractable is null) return;
         
-        if (_inputs.HasInteractActive)
+        if (_inputs.InteractButtonPressed)
         {
             _currentInteractable.Interact();
         }
