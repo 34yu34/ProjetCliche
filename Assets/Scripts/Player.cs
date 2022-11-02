@@ -1,32 +1,52 @@
+using DefaultNamespace;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(PlayerInput))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private float _movementSpeed;
 
-    [InputAxis]
-    [SerializeField] 
-    private string _horizontalInput;
+    [SerializeField] private float _viewDist;
     
-    [InputAxis]
-    [SerializeField] 
-    private string _verticalInput;
-
-
     private Rigidbody2D _rb;
+    private PlayerInput _inputs;
+
+    [SerializeField] private Interactable _currentInteractable;
     
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _inputs = GetComponent<PlayerInput>();
     }
 
     public void FixedUpdate()
     {
-        var movement = _movementSpeed * new Vector2(Input.GetAxis(_horizontalInput), Input.GetAxis(_verticalInput));
+        _rb.velocity = _inputs.MovementInput * _movementSpeed;
         
-        _rb.velocity = movement;
+        LookForward();
+    }
+
+    private void LookForward()
+    {
+        var position = transform.position;
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2(position.x, position.y), _inputs.MovementInput, _viewDist, 1 << Interactable.InteractableLayer);
+        
+        if (hit)
+        {
+            var interactable = hit.collider.GetComponent<Interactable>();
+
+            if (interactable)
+            {
+                _currentInteractable = interactable;
+            }
+        }
+        else
+        {
+            _currentInteractable = null;
+        }
     }
 }
