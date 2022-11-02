@@ -1,7 +1,6 @@
+using System;
 using DefaultNamespace;
-using NaughtyAttributes;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
@@ -26,21 +25,34 @@ public class Player : MonoBehaviour
         _direction = Vector2.right;
     }
 
+    public void Update()
+    {
+        ActivateInteractable();
+    }
+
     public void FixedUpdate()
     {
         _rb.velocity = _inputs.MovementInput * _movementSpeed;
 
-        if (_inputs.MovementInput != Vector2.zero)
-        {
-            _direction = _inputs.MovementInput.normalized;
-        }
+        SetupDirection();
         
-        LookForward();
+        CheckForward();
     }
 
-    private void LookForward()
+
+    private void SetupDirection()
     {
-        
+        if (_inputs.MovementInput != Vector2.zero)
+        {
+            _direction = Math.Abs(_inputs.MovementInput.x) > Math.Abs(_inputs.MovementInput.y)
+                ? new Vector2(_inputs.MovementInput.x, 0)
+                : new Vector2(0, _inputs.MovementInput.y);
+            _direction.Normalize();
+        }
+    }
+
+    private void CheckForward()
+    {
         _currentInteractable = null;
         
         var position = transform.position;
@@ -62,6 +74,21 @@ public class Player : MonoBehaviour
 
         _currentInteractable = interactable;
         CustomDebug.DrawBox(_currentInteractable.transform.position, _currentInteractable.BoxCollider.size, Color.green);
+    }
+    
+    
+    private void ActivateInteractable()
+    {
+        if (_currentInteractable is null)
+        {
+            return;
+        }
+        
+        if (_inputs.HasInteractActive)
+        {
+            _currentInteractable.Interact();
+        }
 
+        CustomDebug.DrawBox(_currentInteractable.transform.position, _currentInteractable.BoxCollider.size, _currentInteractable.IsActive ? Color.yellow : Color.green);
     }
 }
