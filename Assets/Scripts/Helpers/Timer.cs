@@ -49,6 +49,7 @@ namespace Helpers
         {
             _onTimerCompleted.Invoke();
             IsRunning = false;
+            TimerService.Instance.UnregisterTimer(this);
         }
 
         private bool IsTimerDone()

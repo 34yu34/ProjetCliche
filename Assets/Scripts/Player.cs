@@ -58,9 +58,9 @@ public class Player : MonoBehaviour
             transform.position,
             _direction,
             _viewDist,
-            1 << Interactable.InteractableLayer
-        );
-    }
+            LayerMask.GetMask(Interactable.InteractableLayerName)
+    );
+}
 
     private void ActivateInteractable()
     {

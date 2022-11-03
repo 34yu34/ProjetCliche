@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Helpers
@@ -21,33 +22,38 @@ namespace Helpers
             }
         }
 
-        private List<Timer> _timers;
+        private List<Timer> _runningTimers;
+        private List<Timer> _timersToRemove;
 
         private void Awake()
         {
-            _timers = new List<Timer>();
+            _runningTimers = new List<Timer>();
+            _timersToRemove = new List<Timer>();
         }
 
         private void Update()
         {
-            foreach (var timer in _timers)
+            foreach (var timer in _runningTimers)
             {
                 timer.Update();
             }
+
+            _runningTimers = _runningTimers.Except(_timersToRemove).ToList();
+            _timersToRemove.Clear();
         }
 
         public void RegisterTimer(Timer timer)
         {
-            if (_timers.Contains(timer))
+            if (_runningTimers.Contains(timer))
             {
                 return;
             }
-            _timers.Add(timer);
+            _runningTimers.Add(timer);
         }
 
         public void UnregisterTimer(Timer timer)
         {
-            _timers.Remove(timer);
+            _timersToRemove.Add(timer);
         }
     }
 }
