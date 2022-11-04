@@ -27,6 +27,8 @@ namespace Helpers
 
         private void Awake()
         {
+            _instance = FindObjectOfType<TimerService>();
+            
             _runningTimers = new List<Timer>();
             _timersToRemove = new List<Timer>();
         }
