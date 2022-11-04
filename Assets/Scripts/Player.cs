@@ -1,11 +1,13 @@
 using System;
 using Helpers;
 using Interactables;
+using Items;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(PlayerInput))]
+[RequireComponent(typeof(ItemHolder))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private float _movementSpeed;
@@ -14,6 +16,7 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D _rb;
     private PlayerInput _inputs;
+    private ItemHolder _holder;
 
     [SerializeField] private Interactable _currentInteractable;
 
@@ -23,6 +26,7 @@ public class Player : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _inputs = GetComponent<PlayerInput>();
+        _holder = GetComponent<ItemHolder>();
         _direction = Vector2.right;
     }
 
