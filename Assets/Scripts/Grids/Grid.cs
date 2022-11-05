@@ -32,14 +32,14 @@ namespace Grids
             obj.transform.position = pos;
         }
 
-        public void DrawGrid(Vector2Int centerCoord, Vector2Int size)
+        public void DrawGrid(Vector2Int centerCoord, Vector2Int size, Color gridColor)
         {
 #if UNITY_EDITOR
             for (int i = centerCoord.x - size.x; i < centerCoord.x + size.x; i++)
             {
                 for (int j = centerCoord.y - size.y; j < centerCoord.y + size.y; j++)
                 {
-                    CustomDebug.DrawBox(new Vector4(i, j, 0f, 0f), _size, Color.white);
+                    CustomDebug.DrawBox(new Vector4(i, j, 0f, 0f), _size, gridColor);
                 }
             }
 #endif

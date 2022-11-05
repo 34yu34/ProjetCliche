@@ -61,4 +61,4 @@ MonoBehaviour:
     _origin: {x: 0, y: 0}
     _size: {x: 1, y: 1}
   _debugMainGrid: 1
-  _debugMainGridSize: {x: 10, y: 6}
+  _debugMainGridSize: {x: 13, y: 7}

@@ -494,7 +494,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4723157308983670564, guid: 0f36027b36c638049959c2c6c7e8499e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6
+      value: -9
       objectReference: {fileID: 0}
     - target: {fileID: 4723157308983670564, guid: 0f36027b36c638049959c2c6c7e8499e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -532,9 +532,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4723157308983670565, guid: 0f36027b36c638049959c2c6c7e8499e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4723157308983670567, guid: 0f36027b36c638049959c2c6c7e8499e, type: 3}
       propertyPath: m_Name
-      value: Workbemch
+      value: Workbench
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f36027b36c638049959c2c6c7e8499e, type: 3}

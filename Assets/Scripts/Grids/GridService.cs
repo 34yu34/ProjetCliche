@@ -39,7 +39,7 @@ namespace Grids
 #if UNITY_EDITOR
             if (_debugMainGrid)
             {
-                MainGrid.DrawGrid(Vector2Int.zero, _debugMainGridSize);
+                MainGrid.DrawGrid(Vector2Int.zero, _debugMainGridSize, Color.white);
             }
 #endif
         }
