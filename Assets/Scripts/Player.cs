@@ -75,6 +75,7 @@ public class Player : MonoBehaviour
             _currentInteractable.Interact();
         }
 
-        CustomDebug.DrawBox(_currentInteractable.transform.position, _currentInteractable.BoxCollider.size, _currentInteractable.IsActive ? Color.yellow : Color.green);
+        var interactableTransform = _currentInteractable.transform;
+        CustomDebug.DrawBox(interactableTransform.position, _currentInteractable.BoxCollider.size * interactableTransform.localScale, _currentInteractable.IsActive ? Color.yellow : Color.green);
     }
 }
