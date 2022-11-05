@@ -289,7 +289,7 @@ MonoBehaviour:
   _horizontalInput: Horizontal
   _verticalInput: Vertical
   _interactInput: Fire1
-  _grabInput: 
+  _grabInput: Fire2
 --- !u!114 &530904849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -494,11 +494,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4723157308983670564, guid: 0f36027b36c638049959c2c6c7e8499e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 4723157308983670564, guid: 0f36027b36c638049959c2c6c7e8499e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.08
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4723157308983670564, guid: 0f36027b36c638049959c2c6c7e8499e, type: 3}
       propertyPath: m_LocalPosition.z
