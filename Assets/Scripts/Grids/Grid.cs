@@ -12,17 +12,19 @@ namespace Grids
         
         [SerializeField] 
         private Vector2 _size = Vector2.one;
+
+        public Vector2 Origin => _origin;
         
         public Vector2Int WorldToGrid(Vector2 worldPos)
         {
-            var floatGrid = (worldPos / _size) - _origin;
+            var floatGrid = (worldPos - _origin)/ _size;
 
             return floatGrid.Round();
         }
 
         public Vector2 GridToWorld(Vector2Int gridPos)
         {
-            return (gridPos + _origin) * _size;
+            return gridPos * _size + _origin;
         }
 
         public void PlaceOnNearestGrid(GameObject obj)
@@ -39,7 +41,8 @@ namespace Grids
             {
                 for (int j = centerCoord.y - size.y; j < centerCoord.y + size.y; j++)
                 {
-                    CustomDebug.DrawBox(new Vector4(i, j, 0f, 0f), _size, gridColor);
+                    var coord = new Vector2Int(i, j); 
+                    CustomDebug.DrawBox(GridToWorld(coord), _size, gridColor);
                 }
             }
 #endif
