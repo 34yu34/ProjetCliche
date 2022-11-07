@@ -14,6 +14,7 @@ namespace Grids
         private Vector2 _size = Vector2.one;
 
         public Vector2 Origin => _origin;
+        public Vector2 Size => _size;
         
         public Vector2Int WorldToGrid(Vector2 worldPos)
         {
