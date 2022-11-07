@@ -4,31 +4,13 @@ using UnityEngine;
 
 namespace Helpers
 {
-    public class TimerService : MonoBehaviour
+    public class TimerService : Service<TimerService>
     {
-        private static TimerService _instance;
-
-        public static TimerService Instance
-        {
-            get
-            {
-                if (_instance is not null) return _instance;
-            
-                _instance = FindObjectOfType<TimerService>();
-                
-                Debug.Assert(_instance is not null, "Must have a timer service in scene");
-
-                return _instance;
-            }
-        }
-
         private List<Timer> _runningTimers;
         private List<Timer> _timersToRemove;
 
         private void Awake()
         {
-            _instance = FindObjectOfType<TimerService>();
-            
             _runningTimers = new List<Timer>();
             _timersToRemove = new List<Timer>();
         }
