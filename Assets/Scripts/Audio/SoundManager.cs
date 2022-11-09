@@ -33,8 +33,8 @@ public class SoundManager : MonoBehaviour
         AudioListener.volume = volume_slider.value;
     }
 
-    public void PlaySound(AudioClip sound)
+    public void PlaySound(AudioClip sound, float volumeScale = 1f)
     {
-        effect_source.PlayOneShot(sound);
+        effect_source.PlayOneShot(sound,volumeScale);
     }
 }
