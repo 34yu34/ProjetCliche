@@ -1,4 +1,5 @@
 ﻿using System;
+using Helpers;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -38,22 +39,16 @@ namespace Grids
                 OnValidate();
             }
 
-            var currTransform = _renderer.transform;
-            var parent = currTransform.parent;
-            
-            currTransform.parent = null;
-            
-            var sprite = _renderer.sprite;
-            
+            GameObjectManipulator.OperateAsRoot(_renderer.transform, () => ResizeToFit(_renderer.sprite));
+        }
+
+        private void ResizeToFit(Sprite sprite)
+        {
             transform.localScale = new Vector3(
                 CurrentGrid.Size.x * sprite.pixelsPerUnit / sprite.rect.width,
                 CurrentGrid.Size.y * sprite.pixelsPerUnit / sprite.rect.height,
                 1.0f
             );
-
-            currTransform.parent = parent;
         }
-
-
     }
 }

@@ -22,6 +22,7 @@ namespace Items
         }
         
         [SerializeField] private Sprite _uiImage;
+        public Sprite UIImage => _uiImage;
 
         public static explicit operator bool(Item item)
         {
