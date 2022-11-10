@@ -425,6 +425,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 594683485851333981, guid: 33254963e1301e446bcad65ae891b3dc, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 594683485851333981, guid: 33254963e1301e446bcad65ae891b3dc, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33254963e1301e446bcad65ae891b3dc, type: 3}
 --- !u!1001 &1064262959597773986
@@ -484,7 +492,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5528612906790830628, guid: 575e9aa29f662c447b2191187d23350c, type: 3}
       propertyPath: _debugMainGrid
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 575e9aa29f662c447b2191187d23350c, type: 3}
