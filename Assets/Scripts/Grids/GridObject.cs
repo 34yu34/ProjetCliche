@@ -26,7 +26,7 @@ namespace Grids
         }
         
         [Button]
-        private void PlaceOnGrid()
+        public void PlaceOnGrid()
         {
             CurrentGrid.PlaceOnNearestGrid(gameObject);
         }

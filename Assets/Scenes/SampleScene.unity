@@ -374,6 +374,14 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 594683485851333978, guid: 33254963e1301e446bcad65ae891b3dc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 594683485851333978, guid: 33254963e1301e446bcad65ae891b3dc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 594683485851333978, guid: 33254963e1301e446bcad65ae891b3dc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -473,6 +481,10 @@ PrefabInstance:
     - target: {fileID: 1064262959038660011, guid: 575e9aa29f662c447b2191187d23350c, type: 3}
       propertyPath: m_Name
       value: Managers
+      objectReference: {fileID: 0}
+    - target: {fileID: 5528612906790830628, guid: 575e9aa29f662c447b2191187d23350c, type: 3}
+      propertyPath: _debugMainGrid
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 575e9aa29f662c447b2191187d23350c, type: 3}

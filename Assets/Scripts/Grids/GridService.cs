@@ -1,5 +1,6 @@
 ﻿using System;
 using Helpers;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -27,6 +28,17 @@ namespace Grids
                 MainGrid.DrawGrid(MainGrid.Origin.Round(), _debugMainGridSize, Color.white);
             }
 #endif
+        }
+
+        [Button]
+        private void PlaceAllOnGrid()
+        {
+            var objs = FindObjectsOfType<GridObject>();
+
+            foreach (var obj in objs)
+            {
+                obj.PlaceOnGrid();
+            }
         }
     }
 }
