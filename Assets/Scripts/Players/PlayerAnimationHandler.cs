@@ -1,4 +1,5 @@
 ﻿using System;
+using Helpers;
 using UnityEngine;
 
 namespace Players
@@ -15,6 +16,10 @@ namespace Players
         private static readonly int Side = Animator.StringToHash("Side");
         private static readonly int Speed = Animator.StringToHash("Speed");
 
+        [SerializeField] private Timer _walkingTimer;
+
+        private bool _lastIsWalking;
+        
         private enum Direction
         {
             Down = 0,
@@ -30,17 +35,39 @@ namespace Players
 
         private void Start()
         {
-            _player._directionChangeEvent.AddListener(GetDirection);
+            SetupDirectionAnimFlag();
+            SetupWalkingTimer();
+        }
+
+        private void SetupDirectionAnimFlag()
+        {
+            _player._directionChangeEvent.AddListener(SetDirection);
+            SetDirection(_player.Direction);
+        }
+        
+        private void SetupWalkingTimer()
+        {
+            _walkingTimer._onTimerCompleted.AddListener(ChangeWalkingAnimFlag);
+            _lastIsWalking = _player.IsWalking;
+            ChangeWalkingAnimFlag();
         }
 
         public void Update()
         {
-            _animator.SetBool(IsWalking, _player.IsWalking);
-            _animator.SetInteger(Side, (int)_direction);
+            UpdateWalkingChecks();
+            
             _animator.SetFloat(Speed, _player.MovementSpeed);
         }
 
-        public void GetDirection(Vector2 newDirection)
+        private void UpdateWalkingChecks()
+        {
+            if (_lastIsWalking == _player.IsWalking) return;
+            
+            _walkingTimer.Start();
+            _lastIsWalking = _player.IsWalking;
+        }
+
+        private void SetDirection(Vector2 newDirection)
         {
             if (newDirection == Vector2.down)
             {
@@ -53,9 +80,10 @@ namespace Players
             else
             {
                 _direction = Direction.Side;
-
                 SetupSideDirection();
             }
+            
+            _animator.SetInteger(Side, (int)_direction);
         }
 
         private void SetupSideDirection()
@@ -72,6 +100,11 @@ namespace Players
                 transformLocalScale.x = Math.Abs(transformLocalScale.x);
                 _player.transform.localScale = transformLocalScale;
             }
+        }
+
+        private void ChangeWalkingAnimFlag()
+        {
+            _animator.SetBool(IsWalking, _player.IsWalking);
         }
     }
 }

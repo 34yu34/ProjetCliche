@@ -29,7 +29,7 @@ namespace Players
         private Vector2 _direction;
         public Vector2 Direction => _direction;
 
-        public bool IsWalking => _rb.velocity != Vector2.zero; 
+        public bool IsWalking => _inputs.MovementInput != Vector2.zero; 
     
         [HideInInspector] 
         public UnityEvent<Vector2> _directionChangeEvent;
@@ -52,16 +52,16 @@ namespace Players
         {
             _rb.velocity = _inputs.MovementInput * _movementSpeed;
 
-            SetupDirection();
+            LookForNewDirection();
         
             CheckForwardInteractables();
         }
         
-        private void SetupDirection()
+        private void LookForNewDirection()
         {
             var last_dir = _direction;
             
-            _direction = FindNewDirection();
+            _direction = FindNextDirection();
 
             if (last_dir != _direction)
             {
@@ -69,7 +69,7 @@ namespace Players
             }
         }
 
-        private Vector2 FindNewDirection()
+        private Vector2 FindNextDirection()
         {
             if (_inputs.MovementInput != Vector2.zero)
             {

@@ -217,3 +217,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13c8d09c1308425492eec08d716ce930, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _walkingTimer:
+    _duration: 0.05
+    _onTimerCompleted:
+      m_PersistentCalls:
+        m_Calls: []

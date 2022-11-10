@@ -9,6 +9,7 @@ namespace Helpers
     {
         [SerializeField] private float _duration;
     
+        // is true when the timer is started and not completed
         public bool IsRunning { get; private set; }
 
         private float _endTimestamp;
