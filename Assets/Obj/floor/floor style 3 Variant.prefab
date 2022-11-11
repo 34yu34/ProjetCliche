@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &2971842467850876784
+--- !u!1001 &1699985086823368616
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -9,12 +9,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 989910535043037158, guid: d505895becdab6049b0ced06f0022b59, type: 3}
       propertyPath: m_Name
-      value: floor style 1
+      value: floor style 3
       objectReference: {fileID: 0}
     - target: {fileID: 3952036409631994390, guid: d505895becdab6049b0ced06f0022b59, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 1074143475, guid: e58a47e88e39b5244a3971455f939bbf, type: 3}
+      objectReference: {fileID: 1815019974, guid: e58a47e88e39b5244a3971455f939bbf, type: 3}
     - target: {fileID: 5182466628666582582, guid: d505895becdab6049b0ced06f0022b59, type: 3}
       propertyPath: m_RootOrder
       value: 0
