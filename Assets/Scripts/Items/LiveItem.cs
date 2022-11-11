@@ -1,12 +1,14 @@
-﻿using System;
+﻿using Grids;
 using UnityEngine;
 
 namespace Items
 {
     [RequireComponent(typeof(SpriteRenderer))]
+    [RequireComponent(typeof(GridObject))]
     public class LiveItem : MonoBehaviour
     {
         private SpriteRenderer _renderer;
+        private GridObject _gridController;
 
         [SerializeField] private Item _currentItem;
 
@@ -20,6 +22,7 @@ namespace Items
         private void Awake()
         {
             _renderer = GetComponent<SpriteRenderer>();
+            _gridController = GetComponent<GridObject>();
             if (!CurrentItem.IsNull())
             {
                 InitializeNewItem(CurrentItem);
@@ -30,6 +33,7 @@ namespace Items
         {
             _currentItem = newItem;
             _renderer.sprite = _currentItem.UIImage;
+            _gridController.FitToGrid();
         }
     }
 }

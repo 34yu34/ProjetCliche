@@ -32,7 +32,7 @@ namespace Grids
         }
 
         [Button]
-        private void FitToGrid()
+        public void FitToGrid()
         {
             if (_renderer is null)
             {
