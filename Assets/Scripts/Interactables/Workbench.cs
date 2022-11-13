@@ -11,7 +11,7 @@ namespace Interactables
     {
         private ItemHolder _holder;
 
-        private void Awake()
+        protected override void Awake()
         {
             base.Awake();
             _holder = GetComponent<ItemHolder>();
@@ -29,7 +29,16 @@ namespace Interactables
         {
             base.ItemInteract(playerThatActivated);
 
-            playerThatActivated.ItemHolder.TransferTo(_holder);
+            if (!playerThatActivated.ItemHolder.IsHolding && _holder.IsHolding)
+            {
+                _holder.TransferTo(playerThatActivated.ItemHolder);
+                return;
+            }
+
+            if (playerThatActivated.ItemHolder.IsHolding && !_holder.IsHolding)
+            {
+                playerThatActivated.ItemHolder.TransferTo(_holder);
+            }
         }
     }
 }

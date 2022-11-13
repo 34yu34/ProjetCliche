@@ -17,6 +17,12 @@ namespace Items
 
         public override void ItemInteract(Player player)
         {
+            if (player.ItemHolder.HeldItem == _itemToGive)
+            {
+                player.ItemHolder.RemoveItem();
+                return;
+            }
+            
             player.ItemHolder.GiveItem(_itemToGive);
         }
     }

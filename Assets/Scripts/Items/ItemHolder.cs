@@ -35,21 +35,27 @@ namespace Items
             if (!CanTransferTo(holder)) return false;
             
             holder.SetItem(_heldItem);
-            _heldItem = Item.NullItem;
+            RemoveItem();
 
             return true;
         }
 
         private void SetItem(Item item)
         {
-            if (IsHolding)
-            {
-                return;
-            }
+            if (IsHolding) return;
 
             _heldItem = item;
 
             SetupSprite();
+        }
+
+        public void RemoveItem()
+        {
+            if (!IsHolding) return;
+            
+            _heldItem = Item.NullItem;
+            
+            RemoveSprite();
         }
 
         private void SetupSprite()
@@ -57,6 +63,13 @@ namespace Items
             if (_itemSprite == null) return;
             
             _itemSprite.sprite = _heldItem.UIImage;
+        }
+
+        private void RemoveSprite()
+        {
+            if (_itemSprite == null) return;
+
+            _itemSprite.sprite = null;
         }
     }
 }
