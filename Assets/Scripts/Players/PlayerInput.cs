@@ -23,7 +23,7 @@ namespace Players
     
         public Vector2 MovementInput { get; private set; }
         public bool InteractButtonPressed { get; private set; }
-        public bool GrabButtonPressed { get; private set; } 
+        public bool ItemButtonPressed { get; private set; } 
 
         private void Update()
         {
@@ -31,7 +31,7 @@ namespace Players
 
             InteractButtonPressed = Input.GetButtonDown(_interactInput);
 
-            GrabButtonPressed = Input.GetButtonDown(_grabInput);
+            ItemButtonPressed = Input.GetButtonDown(_grabInput);
         }
     }
 }

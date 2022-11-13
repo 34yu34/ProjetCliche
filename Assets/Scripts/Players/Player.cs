@@ -25,7 +25,8 @@ namespace Players
         private ItemHolder _holder;
 
         [SerializeField] private Interactable _currentInteractable;
-
+        public ItemHolder ItemHolder => _holder;
+        
         private Vector2 _direction;
         public Vector2 Direction => _direction;
 
@@ -33,7 +34,7 @@ namespace Players
     
         [HideInInspector] 
         public UnityEvent<Vector2> _directionChangeEvent;
-    
+        
         private void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
@@ -100,7 +101,12 @@ namespace Players
         
             if (_inputs.InteractButtonPressed)
             {
-                _currentInteractable.Interact();
+                _currentInteractable.ActivityInteract(this);
+            }
+
+            if (_inputs.ItemButtonPressed)
+            {
+                _currentInteractable.ItemInteract(this);
             }
 
             var interactableTransform = _currentInteractable.transform;

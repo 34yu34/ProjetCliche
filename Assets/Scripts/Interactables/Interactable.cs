@@ -1,4 +1,5 @@
 ﻿using Helpers;
+using Players;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -11,9 +12,9 @@ namespace Interactables
 
         public BoxCollider2D BoxCollider { get; private set; }
 
-        [SerializeField] private Timer _activeTimer;
-
-        public bool IsActive => _activeTimer.IsRunning;
+        [FormerlySerializedAs("_activeTimer")] [SerializeField] private Timer _activityDurationTimer;
+        
+        public bool IsActive => _activityDurationTimer.IsRunning;
     
         protected virtual void Awake()
         {
@@ -21,11 +22,17 @@ namespace Interactables
             BoxCollider = GetComponent<BoxCollider2D>();
         }
 
-        public virtual void Interact()
+        public virtual void ActivityInteract(Player playerThatActivated)
         {
-            if (_activeTimer.IsRunning) return;
+            if (_activityDurationTimer.IsRunning) return;
         
-            _activeTimer.Start();
+            _activityDurationTimer.Start();
         }
+
+        public virtual void ItemInteract(Player playerThatActivated)
+        {
+            
+        }
+        
     }
 }
