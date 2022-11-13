@@ -1,6 +1,7 @@
 ﻿using Helpers;
 using Players;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 namespace Interactables
@@ -11,28 +12,28 @@ namespace Interactables
         public static string InteractableLayerName => "Interactable";
 
         public BoxCollider2D BoxCollider { get; private set; }
-
-        [FormerlySerializedAs("_activeTimer")] [SerializeField] private Timer _activityDurationTimer;
         
-        public bool IsActive => _activityDurationTimer.IsRunning;
-    
+        public UnityEvent<Player> ActivityInteractEvent { get; private set; }
+        public UnityEvent<Player> ItemInteractEvent { get; private set; }
+        
+        public bool IsRunning { get; set; }
+        
         protected virtual void Awake()
         {
             gameObject.layer = LayerMask.NameToLayer(InteractableLayerName);
             BoxCollider = GetComponent<BoxCollider2D>();
+            ActivityInteractEvent = new UnityEvent<Player>();
+            ItemInteractEvent = new UnityEvent<Player>();
         }
 
-        public virtual void ActivityInteract(Player playerThatActivated)
+        public void ActivityInteract(Player playerThatActivated)
         {
-            if (_activityDurationTimer.IsRunning) return;
-        
-            _activityDurationTimer.Start();
+            ActivityInteractEvent.Invoke(playerThatActivated);
         }
 
-        public virtual void ItemInteract(Player playerThatActivated)
+        public void ItemInteract(Player playerThatActivated)
         {
-            
+            ItemInteractEvent.Invoke(playerThatActivated);
         }
-        
     }
 }

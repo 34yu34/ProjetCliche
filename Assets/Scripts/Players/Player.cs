@@ -110,7 +110,7 @@ namespace Players
             }
 
             var interactableTransform = _currentInteractable.transform;
-            CustomDebug.DrawBox(interactableTransform.position, _currentInteractable.BoxCollider.size * interactableTransform.localScale, _currentInteractable.IsActive ? Color.yellow : Color.green);
+            CustomDebug.DrawBox(interactableTransform.position, _currentInteractable.BoxCollider.size * interactableTransform.localScale, _currentInteractable.IsRunning ? Color.yellow : Color.green);
         }
 
         private void ResetInteractable(Vector2 newDirection)

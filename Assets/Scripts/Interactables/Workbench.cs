@@ -1,4 +1,5 @@
-﻿using Grids;
+﻿using System;
+using Grids;
 using Items;
 using Players;
 using UnityEngine;
@@ -7,28 +8,30 @@ namespace Interactables
 {
     [RequireComponent(typeof(ItemHolder))]
     [RequireComponent(typeof(GridObject))]
-    public class Workbench: Interactable
+    [RequireComponent(typeof(Interactable))]
+    public class Workbench: MonoBehaviour
     {
         private ItemHolder _holder;
+        private Interactable _interactable;
 
-        protected override void Awake()
+        private void Awake()
         {
-            base.Awake();
             _holder = GetComponent<ItemHolder>();
+            _interactable = GetComponent<Interactable>();
         }
 
-
-        public override void ActivityInteract(Player playerThatActivated)
+        private void OnEnable()
         {
-            base.ActivityInteract(playerThatActivated);
-            
-            
+            _interactable.ItemInteractEvent.AddListener(ItemInteract);
         }
 
-        public override void ItemInteract(Player playerThatActivated)
+        private void OnDisable()
         {
-            base.ItemInteract(playerThatActivated);
+            _interactable.ItemInteractEvent.RemoveListener(ItemInteract);
+        }
 
+        private void ItemInteract(Player playerThatActivated)
+        {
             if (!playerThatActivated.ItemHolder.IsHolding && _holder.IsHolding)
             {
                 _holder.TransferTo(playerThatActivated.ItemHolder);
