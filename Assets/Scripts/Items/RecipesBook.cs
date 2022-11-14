@@ -9,7 +9,7 @@ namespace Items
     {
         [SerializeField] private List<Recipe> _recipes;
 
-        public Recipe GetRecipeFor(List<Item> inputsItem)
+        public Recipe GetRecipeFor(IEnumerable<Item> inputsItem)
         {
             foreach (var recipe in _recipes.Where(recipe => recipe.InputItems.SequenceEqual(inputsItem)))
             {

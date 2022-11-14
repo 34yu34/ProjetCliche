@@ -1,22 +1,22 @@
-﻿using System;
-using Interactables;
+﻿using Interactables;
+using Items;
 using Players;
 using UnityEngine;
 
-namespace Items
+namespace Clients
 {
     [RequireComponent(typeof(Interactable))]
-    public class ItemDispenser : MonoBehaviour
+    public class Client : MonoBehaviour
     {
-        [SerializeField] private Item _itemToGive;
-
+        [SerializeField] private Item _request;
+        
         private Interactable _interactable;
-
+        
         private void Awake()
         {
             _interactable = GetComponent<Interactable>();
+            
         }
-
         private void OnEnable()
         {
             _interactable.ItemInteractEvent.AddListener(ItemInteract);
@@ -27,15 +27,13 @@ namespace Items
             _interactable.ItemInteractEvent.RemoveListener(ItemInteract);
         }
 
-        public void ItemInteract(Player player)
+        private void ItemInteract(Player player)
         {
-            if (player.ItemHolder.HeldItem == _itemToGive)
+            if (player.ItemHolder.HeldItem == _request)
             {
                 player.ItemHolder.PopItem();
-                return;
             }
-            
-            player.ItemHolder.GiveItem(_itemToGive);
         }
     }
+
 }

@@ -15,6 +15,7 @@ namespace Items
         public List<Item> InputItems => _inputItems;
         public Item OutputItem => _outputItem;
         public GameObject RecipeAnimation => _recipeAnimation;
+        public float RecipeCompletionTime => _recipeCompletionTime;
         
         
         private static Recipe _nullRecipe;
@@ -38,6 +39,7 @@ namespace Items
             _nullRecipe._inputItems = new List<Item>(0);
             _nullRecipe._outputItem = Item.NullItem;
             _nullRecipe._recipeAnimation = null;
+            _nullRecipe._recipeCompletionTime = float.MaxValue;
             _nullRecipe.name = "NullRecipe";
         }
 

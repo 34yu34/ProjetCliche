@@ -178,6 +178,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: normal table Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8151987307524779988, guid: b1aa2f03a9a6234459324682e406467f, type: 3}
+      propertyPath: _workbenchData
+      value: 
+      objectReference: {fileID: 11400000, guid: efcaeec4cccae7840b007d19867bbb86, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1aa2f03a9a6234459324682e406467f, type: 3}
 --- !u!1 &705507993
