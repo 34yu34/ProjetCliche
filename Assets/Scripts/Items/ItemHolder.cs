@@ -23,24 +23,17 @@ namespace Items
             return !holder.IsHolding && IsHolding;
         }
 
-        public void GiveItem(Item item)
-        {
-            if (IsHolding) return;
-
-            SetItem(item);
-        }
-
         public bool TransferTo(ItemHolder holder)
         {
             if (!CanTransferTo(holder)) return false;
             
-            holder.SetItem(_heldItem);
+            holder.GiveItem(_heldItem);
             RemoveItem();
 
             return true;
         }
-
-        private void SetItem(Item item)
+        
+        public void GiveItem(Item item)
         {
             if (IsHolding) return;
 

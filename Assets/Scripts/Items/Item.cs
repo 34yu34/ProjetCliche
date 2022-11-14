@@ -16,6 +16,7 @@ namespace Items
                 
                 _nullItem = CreateInstance<Item>();
                 _nullItem._uiImage = null;
+                _nullItem.name = "NullItem";
 
                 return _nullItem;
             }
