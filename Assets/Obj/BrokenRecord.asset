@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15beaa152e0148f3ad1f4bace052d0ec, type: 3}
   m_Name: BrokenRecord
   m_EditorClassIdentifier: 
-  _uiImage: {fileID: 0}
+  _uiImage: {fileID: -375042414, guid: 27a67bb4fff1306458c746505aa816ff, type: 3}

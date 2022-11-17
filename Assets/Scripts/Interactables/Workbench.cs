@@ -1,4 +1,5 @@
-﻿using Grids;
+﻿using System;
+using Grids;
 using Items;
 using NaughtyAttributes;
 using Players;
@@ -18,6 +19,8 @@ namespace Interactables
         [Expandable]
         private WorkbenchData _workbenchData;
 
+        [SerializeField] private RecipeProgressionBar _progressionBar;
+
         [ShowNonSerializedField] private Recipe _currentRecipe;
         [ShowNonSerializedField] private float _currentRecipeCompletion;
         
@@ -28,6 +31,11 @@ namespace Interactables
             _interactable = GetComponent<Interactable>();
             
             Debug.Assert(_workbenchData is not null, "A workbench is in the scene without any data attached to it");
+        }
+
+        private void Start()
+        {
+            ChangeRecipeByInputItems();
         }
 
         private void OnEnable()
@@ -45,6 +53,8 @@ namespace Interactables
         private void Update()
         {
             _currentRecipeCompletion += Time.deltaTime * _workbenchData._automationCompletionSpeed;
+
+            _progressionBar.BarPercent = _currentRecipeCompletion / _currentRecipe.RecipeCompletionTime;
 
             if (_currentRecipeCompletion >= _currentRecipe.RecipeCompletionTime)
             {
@@ -82,6 +92,8 @@ namespace Interactables
         {
             _currentRecipe = _workbenchData._recipes.GetRecipeFor(_itemHolder.AllItems);
             _currentRecipeCompletion = 0f;
+
+            _progressionBar.gameObject.SetActive(!_currentRecipe.IsNull());
         }
     }
 }

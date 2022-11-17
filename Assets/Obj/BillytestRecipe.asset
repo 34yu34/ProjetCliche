@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0441e3bdc5594391b32e6f0d3e677c13, type: 3}
   m_Name: BillytestRecipe
   m_EditorClassIdentifier: 
-  _inputItems: []
-  _outputItem: {fileID: 0}
+  _inputItems:
+  - {fileID: 11400000, guid: 889a7e899bb1d334885e1ab8a6507cf4, type: 2}
+  _outputItem: {fileID: 11400000, guid: 15e6a250f23cc8d4a84194fb28300c69, type: 2}
   _recipeAnimation: {fileID: 0}
-  _recipeCompletionTime: 0
+  _recipeCompletionTime: 1
