@@ -47,6 +47,14 @@ namespace Items
             SetupSprite(item);
         }
 
+        public void RemoveAll()
+        {
+            for (var i = 0; i < _heldItems.Count; i++)
+            {
+                PopItem();
+            }
+        }
+
         public Item PopItem()
         {
             if (!IsHolding) return Item.NullItem;

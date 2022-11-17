@@ -48,7 +48,9 @@ namespace Interactables
 
             if (_currentRecipeCompletion >= _currentRecipe.RecipeCompletionTime)
             {
-                
+                _itemHolder.RemoveAll();
+                _itemHolder.GiveItem(_currentRecipe.OutputItem);
+                ChangeRecipeByInputItems();
             }
         }
 
@@ -65,19 +67,20 @@ namespace Interactables
             if (_itemHolder.CanTransferTo(playerThatActivated.ItemHolder))
             {
                 _itemHolder.TransferTo(playerThatActivated.ItemHolder);
+                ChangeRecipeByInputItems();
                 return;
             }
 
             if (playerThatActivated.ItemHolder.CanTransferTo(_itemHolder))
             {
                 playerThatActivated.ItemHolder.TransferTo(_itemHolder);
-                _currentRecipe = _workbenchData._recipes.GetRecipeFor(_itemHolder.AllItems);
+                ChangeRecipeByInputItems();
             }
         }
 
-        private void ChangeRecipeFor(Recipe recipe)
+        private void ChangeRecipeByInputItems()
         {
-            _currentRecipe = recipe;
+            _currentRecipe = _workbenchData._recipes.GetRecipeFor(_itemHolder.AllItems);
             _currentRecipeCompletion = 0f;
         }
     }
