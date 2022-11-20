@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -11,8 +10,6 @@ public class SoundManager : MonoBehaviour
     private AudioSource effect_source;
     [SerializeField]
     private AudioSource music_source;
-    [SerializeField]
-    private Slider volume_slider;
 
     private void Awake()
     {
@@ -27,10 +24,24 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    public void SetEffectsVolume(float scale)
     {
-        volume_slider.onValueChanged.AddListener(val => AudioListener.volume = val);
-        AudioListener.volume = volume_slider.value;
+        if (scale < 0 || scale > 1)
+        {
+            Debug.LogError("volume scale should always be between 0 and 1 inclusively");
+            return;
+        }
+        effect_source.volume = scale;
+    }
+
+    public void SetMusicVolume(float scale)
+    {
+        if (scale < 0 || scale > 1)
+        {
+            Debug.LogError("volume scale should always be between 0 and 1 inclusively");
+            return;
+        }
+        music_source.volume = scale;
     }
 
     public void PlaySound(AudioClip sound, float volumeScale = 1f)
