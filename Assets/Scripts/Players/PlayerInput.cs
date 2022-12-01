@@ -29,7 +29,7 @@ namespace Players
         {
             MovementInput = new Vector2(Input.GetAxis(_horizontalInput), Input.GetAxis(_verticalInput));
 
-            InteractButtonPressed = Input.GetButtonDown(_interactInput);
+            InteractButtonPressed = Input.GetButton(_interactInput);
 
             ItemButtonPressed = Input.GetButtonDown(_grabInput);
         }

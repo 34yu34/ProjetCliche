@@ -31,7 +31,7 @@ namespace Items
         {
             if (player.ItemHolder.HeldItem == _itemToGive)
             {
-                player.ItemHolder.RemoveItem();
+                player.ItemHolder.PopItem();
                 return;
             }
             

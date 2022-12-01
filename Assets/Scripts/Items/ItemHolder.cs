@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -6,63 +7,70 @@ namespace Items
 {
     public class ItemHolder : MonoBehaviour
     {
-        [SerializeField] private Item _heldItem;
-        public Item HeldItem => _heldItem;
+        private Stack<Item> _heldItems;
+        [SerializeField] private int _maxQuantity = 1;
 
         [SerializeField] private SpriteRenderer _itemSprite;
         
-        public bool IsHolding => !_heldItem.IsNull();
+        public bool IsHolding => _heldItems.Count > 0;
+        public bool IsFull => _heldItems.Count == _maxQuantity;
+
+        public Item HeldItem => IsHolding ? _heldItems.Peek() : Item.NullItem;
+
+        public Item[] AllItems => _heldItems.ToArray();
 
         private void Awake()
         {
-            _heldItem ??= Item.NullItem;
+            _heldItems = new Stack<Item>();
         }
 
         public bool CanTransferTo(ItemHolder holder)
         {
-            return !holder.IsHolding && IsHolding;
-        }
-
-        public void GiveItem(Item item)
-        {
-            if (IsHolding) return;
-
-            SetItem(item);
+            return !holder.IsFull && IsHolding;
         }
 
         public bool TransferTo(ItemHolder holder)
         {
             if (!CanTransferTo(holder)) return false;
             
-            holder.SetItem(_heldItem);
-            RemoveItem();
+            holder.GiveItem(PopItem());
 
             return true;
         }
-
-        private void SetItem(Item item)
+        
+        public void GiveItem(Item item)
         {
-            if (IsHolding) return;
+            if (IsFull) return;
+            
+            _heldItems.Push(item);
 
-            _heldItem = item;
-
-            SetupSprite();
+            SetupSprite(item);
         }
 
-        public void RemoveItem()
+        public void RemoveAll()
         {
-            if (!IsHolding) return;
-            
-            _heldItem = Item.NullItem;
+            for (var i = 0; i < _heldItems.Count; i++)
+            {
+                PopItem();
+            }
+        }
+
+        public Item PopItem()
+        {
+            if (!IsHolding) return Item.NullItem;
+
+            var removedItem = _heldItems.Pop();
             
             RemoveSprite();
+
+            return removedItem;
         }
 
-        private void SetupSprite()
+        private void SetupSprite(Item item)
         {
             if (_itemSprite == null) return;
             
-            _itemSprite.sprite = _heldItem.UIImage;
+            _itemSprite.sprite = item.UIImage;
         }
 
         private void RemoveSprite()
